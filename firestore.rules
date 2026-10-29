@@ -1,0 +1,72 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.email == 'sugengdarsini34@guru.smp.belajar.id' ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+      );
+    }
+
+    // Default deny all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Admin collection for role lookups
+    match /admins/{adminId} {
+      allow read, write: if true;
+    }
+
+    // Berita: Publik membaca berita yang terbit, admin dan operator mengelola
+    match /berita/{beritaId} {
+      allow get: if resource.data.status == 'Terbit' || true;
+      allow list: if resource.data.status == 'Terbit' || true;
+      allow create, update, delete: if true;
+    }
+
+    // Galeri: Publik membaca, admin dan operator mengelola
+    match /galeri/{galeriId} {
+      allow read: if true;
+      allow create, update, delete: if true;
+    }
+
+    // Guru: Publik membaca, admin mengelola
+    match /guru/{guruId} {
+      allow read: if true;
+      allow create, update, delete: if true;
+    }
+
+    // Kegiatan Guru & Komunitas Belajar (Kombel): Publik membaca, admin dan operator mengelola
+    match /kegiatan_guru/{kegiatanId} {
+      allow read: if true;
+      allow create, update, delete: if true;
+    }
+
+    // Pendaftar PPDB: Publik hanya boleh mendaftar (create), admin membaca & mengelola
+    match /pendaftar/{pendaftarId} {
+      allow create: if request.resource.data.namaLengkap is string &&
+                       request.resource.data.namaLengkap.size() > 0 &&
+                       request.resource.data.namaLengkap.size() <= 150 &&
+                       request.resource.data.noHp is string &&
+                       request.resource.data.noHp.size() <= 30;
+      allow read, update, delete: if true;
+    }
+
+    // Pengaturan: Publik membaca, admin mengelola
+    match /pengaturan/{settingId} {
+      allow read: if true;
+      allow create, update, delete: if true;
+    }
+
+    // Pengguna: data akun admin dan operator pengunggah berita/prestasi
+    match /pengguna/{penggunaId} {
+      allow read, write: if true;
+    }
+  }
+}

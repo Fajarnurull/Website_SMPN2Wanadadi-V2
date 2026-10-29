@@ -1,0 +1,6 @@
+{
+  "name": "SMP Negeri 2 Wanadadi",
+  "description": "Website resmi dan portal informasi SMP Negeri 2 Wanadadi, Kabupaten Banjarnegara, Jawa Tengah beserta konsol admin dan pendaftaran PPDB.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

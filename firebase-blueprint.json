@@ -1,0 +1,175 @@
+{
+  "entities": {
+    "Berita": {
+      "title": "Berita",
+      "description": "Artikel berita dan pengumuman sekolah",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "judul": { "type": "string", "maxLength": 200 },
+        "ringkasan": { "type": "string", "maxLength": 500 },
+        "isi": { "type": "string", "maxLength": 50000 },
+        "fotoSampul": { "type": "string", "maxLength": 2048 },
+        "tanggal": { "type": "string", "maxLength": 30 },
+        "kategori": { "type": "string", "maxLength": 50 },
+        "status": { "type": "string", "enum": ["Terbit", "Draf"] },
+        "penulis": { "type": "string", "maxLength": 100 },
+        "createdAt": { "type": "string", "maxLength": 50 },
+        "updatedAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["judul", "isi", "status", "tanggal"]
+    },
+    "Galeri": {
+      "title": "Galeri",
+      "description": "Foto dokumentasi kegiatan dan fasilitas sekolah",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "judul": { "type": "string", "maxLength": 150 },
+        "kategori": { "type": "string", "maxLength": 50 },
+        "urlFoto": { "type": "string", "maxLength": 2048 },
+        "keterangan": { "type": "string", "maxLength": 500 },
+        "tanggal": { "type": "string", "maxLength": 30 },
+        "createdAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["judul", "kategori", "urlFoto"]
+    },
+    "Guru": {
+      "title": "Guru",
+      "description": "Data tenaga pendidik dan kependidikan sekolah",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "nama": { "type": "string", "maxLength": 120 },
+        "nip": { "type": "string", "maxLength": 40 },
+        "mataPelajaran": { "type": "string", "maxLength": 100 },
+        "jabatan": { "type": "string", "maxLength": 100 },
+        "fotoUrl": { "type": "string", "maxLength": 2048 },
+        "urutan": { "type": "number" },
+        "createdAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["nama", "mataPelajaran"]
+    },
+    "Pendaftar": {
+      "title": "Pendaftar",
+      "description": "Data calon siswa baru PPDB online",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "noPendaftaran": { "type": "string", "maxLength": 50 },
+        "namaLengkap": { "type": "string", "maxLength": 150 },
+        "nisn": { "type": "string", "maxLength": 20 },
+        "tempatLahir": { "type": "string", "maxLength": 100 },
+        "tanggalLahir": { "type": "string", "maxLength": 30 },
+        "jenisKelamin": { "type": "string", "enum": ["Laki-laki", "Perempuan"] },
+        "asalSekolah": { "type": "string", "maxLength": 150 },
+        "namaOrangTua": { "type": "string", "maxLength": 150 },
+        "noHp": { "type": "string", "maxLength": 30 },
+        "alamat": { "type": "string", "maxLength": 500 },
+        "status": { "type": "string", "enum": ["Baru", "Diverifikasi", "Diterima", "Ditolak"] },
+        "catatan": { "type": "string", "maxLength": 500 },
+        "createdAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["namaLengkap", "asalSekolah", "namaOrangTua", "noHp", "alamat"]
+    },
+    "Pengaturan": {
+      "title": "Pengaturan",
+      "description": "Informasi umum profil sekolah dan konfigurasi PPDB",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "namaSekolah": { "type": "string", "maxLength": 150 },
+        "slogan": { "type": "string", "maxLength": 200 },
+        "npsn": { "type": "string", "maxLength": 30 },
+        "akreditasi": { "type": "string", "maxLength": 10 },
+        "sambutanKepala": { "type": "string", "maxLength": 5000 },
+        "namaKepala": { "type": "string", "maxLength": 150 },
+        "fotoKepala": { "type": "string", "maxLength": 2048 },
+        "totalSiswa": { "type": "number" },
+        "totalGuru": { "type": "number" },
+        "totalRombel": { "type": "number" },
+        "alamatLengkap": { "type": "string", "maxLength": 500 },
+        "email": { "type": "string", "maxLength": 120 },
+        "telepon": { "type": "string", "maxLength": 50 },
+        "whatsapp": { "type": "string", "maxLength": 30 },
+        "jamLayanan": { "type": "string", "maxLength": 150 },
+        "linkMaps": { "type": "string", "maxLength": 2048 },
+        "statusPpdb": { "type": "string", "maxLength": 50 },
+        "jadwalPpdb": { "type": "string", "maxLength": 500 },
+        "syaratPpdb": { "type": "string", "maxLength": 2000 },
+        "youtubeUrl": { "type": "string", "maxLength": 500 },
+        "tiktokUrl": { "type": "string", "maxLength": 500 },
+        "instagramUrl": { "type": "string", "maxLength": 500 },
+        "facebookUrl": { "type": "string", "maxLength": 500 },
+        "updatedAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["namaSekolah", "slogan"]
+    },
+    "KegiatanGuru": {
+      "title": "KegiatanGuru",
+      "description": "Kegiatan bapak ibu guru, komunitas belajar (Kombel), workshop dan diseminasi praktik baik",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "judul": { "type": "string", "maxLength": 200 },
+        "kategori": { "type": "string", "maxLength": 60 },
+        "tanggal": { "type": "string", "maxLength": 40 },
+        "waktu": { "type": "string", "maxLength": 40 },
+        "tempat": { "type": "string", "maxLength": 150 },
+        "penyelenggara": { "type": "string", "maxLength": 150 },
+        "narasumber": { "type": "string", "maxLength": 150 },
+        "deskripsi": { "type": "string", "maxLength": 10000 },
+        "fotoUrl": { "type": "string", "maxLength": 2048 },
+        "tautanMateri": { "type": "string", "maxLength": 2048 },
+        "status": { "type": "string", "enum": ["Terlaksana", "Akan Datang"] },
+        "createdAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["judul", "kategori", "tanggal", "deskripsi"]
+    },
+    "Pengguna": {
+      "title": "Pengguna",
+      "description": "Pengguna konsol admin dan operator pengunggah berita/prestasi",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "username": { "type": "string", "maxLength": 50 },
+        "nama": { "type": "string", "maxLength": 120 },
+        "password": { "type": "string", "maxLength": 128 },
+        "role": { "type": "string", "enum": ["admin", "kontributor"] },
+        "aktif": { "type": "boolean" },
+        "createdAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["username", "nama", "password", "role"]
+    }
+  },
+  "firestore": {
+    "/berita/{beritaId}": {
+      "schema": { "$ref": "#/entities/Berita" },
+      "description": "Koleksi artikel berita dan pengumuman sekolah"
+    },
+    "/galeri/{galeriId}": {
+      "schema": { "$ref": "#/entities/Galeri" },
+      "description": "Koleksi foto kegiatan dan fasilitas"
+    },
+    "/guru/{guruId}": {
+      "schema": { "$ref": "#/entities/Guru" },
+      "description": "Koleksi profil bapak dan ibu guru"
+    },
+    "/kegiatan_guru/{kegiatanId}": {
+      "schema": { "$ref": "#/entities/KegiatanGuru" },
+      "description": "Koleksi kegiatan bapak ibu guru dan komunitas belajar (Kombel)"
+    },
+    "/pendaftar/{pendaftarId}": {
+      "schema": { "$ref": "#/entities/Pendaftar" },
+      "description": "Data pendaftar PPDB online"
+    },
+    "/pengaturan/{settingId}": {
+      "schema": { "$ref": "#/entities/Pengaturan" },
+      "description": "Pengaturan identitas sekolah"
+    },
+    "/pengguna/{penggunaId}": {
+      "schema": { "$ref": "#/entities/Pengguna" },
+      "description": "Koleksi akun admin dan operator pengunggah berita/prestasi"
+    }
+  }
+}
